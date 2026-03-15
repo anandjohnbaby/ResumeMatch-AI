@@ -15,8 +15,6 @@ def extract_text_from_pdf(file_bytes: bytes) -> str:
         doc.close()
 
         clean_text = " ".join(text.split())
-        print("----------------------------------------------------------------------------")
-        print(clean_text)
 
         if not clean_text.strip():
             raise PDFExtractionError("PDF appears to be empty or image-only (no extractable text).")
