@@ -9,7 +9,7 @@ if settings.GROQ_API_KEY:
     groq_client = Groq(api_key=settings.GROQ_API_KEY)
 
 # Extracts and normalizes technical skills from resume or JD text
-def extract_skills_with_llm(text: str, context_type: str) -> list[str]:
+def extract_skills_with_llm(text: str, context_type: str) -> set[str]:
     if not groq_client:
         raise SkillExtractionError("Internal configuration error")
 
@@ -44,7 +44,7 @@ def extract_skills_with_llm(text: str, context_type: str) -> list[str]:
 
     normalized = {normalize_skill(str(s)) for s in skills if isinstance(s, str)}
 
-    return [
+    return {
         s for s in normalized
         if s and len(s.split()) < 4
-    ]
+    }
