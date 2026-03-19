@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">ResumeMatcher AI</div>
+    </nav>
+
+    <main class="container">
+        <div class="dashboard-header">
+            <h2>Intelligence Dashboard</h2>
+        </div>
+
+        <div class="grid layout">
+            <!-- Input Panel -->
+            <div class="card panel">
+                <h3>1. Request Analysis</h3>
+                <p class="text-sm text-muted mb-4">Upload a resume and job description to calculate fit.</p>
+
+                <div id="match-form">
+                    <div class="form-group">
+                        <label for="resume">Candidate Resume (PDF)</label>
+                        <input type="file" id="resume" name="resume" accept="application/pdf" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="job_title">Job Title</label>
+                        <input type="text" id="job_title" placeholder="e.g. Senior Backend Engineer" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="jd">Job Description</label>
+                        <textarea id="jd" rows="6" placeholder="Paste the job description here..." required></textarea>
+                    </div>
+
+                    <button class="btn btn-primary w-100" id="analyze-btn" onclick="analyzeResume()">
+                        <span id="btn-text">Analyze Match</span>
+                        <div class="spinner hidden" id="loading-spinner"></div>
+                    </button>
+                </div>
+
+                <div id="match-error" class="error-msg mt-3"></div>
+            </div>
+
+            <!-- Results Panel -->
+            <div class="card panel">
+                <h3>2. Match Results</h3>
+
+                <div id="empty-state" class="empty-state">
+                    <p>Awaiting analysis...</p>
+                </div>
+
+                <div id="results-container" class="hidden fade-in">
+                    <div class="score-circle" id="score-circle">
+                        <span id="match-score">0%</span>
+                    </div>
+                    <h4 class="text-center mb-4">Match Percentage</h4>
+
+                    <div class="skills-block">
+                        <h5>Matched Skills (<span id="matched-count">0</span>)</h5>
+                        <div id="overlap-skills" class="tags success mt-3"></div>
+                    </div>
+
+                    <div class="skills-block mt-4">
+                        <h5>Missing Skills (<span id="missing-count">0</span>)</h5>
+                        <div id="missing-skills" class="tags danger mt-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
